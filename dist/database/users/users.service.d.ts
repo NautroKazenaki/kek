@@ -5,4 +5,5 @@ export declare class UsersService {
     constructor(databaseService: DatabaseService);
     addDefaultUserIfNeeded(): Promise<void>;
     addUser({ name, password, level }: usersDto): Promise<void>;
+    findAll(): Promise<any[]>;
 }

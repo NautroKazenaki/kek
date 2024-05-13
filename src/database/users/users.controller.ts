@@ -9,4 +9,9 @@ export class UsersController {
     async addDefaultUserIfNeeded(): Promise<void> {
         return await this.usersService.addDefaultUserIfNeeded()
     }
+
+    @Get()
+    async findAll(): Promise<any[]> {
+        return await this.usersService.findAll()
+    }
 }

@@ -37,4 +37,8 @@ export class UsersService {
                     
                 }
         }
+
+    async findAll(): Promise<any[]> {
+        return await this.databaseService.query('SELECT * FROM users')
+    }
     }

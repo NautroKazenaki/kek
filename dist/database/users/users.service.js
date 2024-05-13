@@ -46,6 +46,9 @@ let UsersService = class UsersService {
             console.error('Admin already exist');
         }
     }
+    async findAll() {
+        return await this.databaseService.query('SELECT * FROM users');
+    }
 };
 exports.UsersService = UsersService;
 __decorate([

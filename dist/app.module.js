@@ -13,11 +13,20 @@ const app_service_1 = require("./app.service");
 const users_module_1 = require("./database/users/users.module");
 const database_module_1 = require("./database/database.module");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+            next();
+        })
+            .forRoutes({ path: '*', method: common_1.RequestMethod.ALL });
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule, users_module_1.UsersModule],
+        imports: [database_module_1.DatabaseModule, users_module_1.UsersModule,],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
