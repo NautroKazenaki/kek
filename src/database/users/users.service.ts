@@ -42,7 +42,10 @@ export class UsersService {
         return await this.databaseService.query('SELECT * FROM users')
     }
 
-    async loginUser(email: string, password: string): Promise<any> {
-        return await this.databaseService.query('SELECT * FROM users WHERE name = ? AND password = ?', [email, password])
+    async loginUser(name: string, password: string): Promise<any> {
+        const sql = 'SELECT * FROM users WHERE name = ? AND password = ?';
+        const params = [name, password]; // Pass email and password as parameters
+        return await this.databaseService.query(sql, params);
+
     }
 }

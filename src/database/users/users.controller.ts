@@ -6,9 +6,9 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Post()
-    async loginUser(@Body() userData: { email: string; password: string }): Promise<void> {
-        const { email, password } = userData;
-        return await this.usersService.loginUser(email, password)
+    async loginUser(@Body() userData: { name: string; password: string }): Promise<void> {
+        const { name, password } = userData;
+        return await this.usersService.loginUser(name, password)
     }
 
     @Get()

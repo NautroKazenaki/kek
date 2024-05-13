@@ -20,8 +20,13 @@ let UsersController = class UsersController {
         this.usersService = usersService;
     }
     async loginUser(userData) {
+<<<<<<< HEAD
         const { email, password } = userData;
         return await this.usersService.loginUser(email, password);
+=======
+        const { name, password } = userData;
+        return await this.usersService.loginUser(name, password);
+>>>>>>> e23d328f959b2fe93e4378c43d0382638adad044
     }
     async findAll() {
         return await this.usersService.findAll();
