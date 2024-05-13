@@ -6,8 +6,8 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Post()
-    async addDefaultUserIfNeeded(): Promise<void> {
-        return await this.usersService.addDefaultUserIfNeeded()
+    async loginUser(email: string, password: string): Promise<void> {
+        return await this.usersService.loginUser(email, password)
     }
 
     @Get()

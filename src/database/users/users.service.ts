@@ -5,7 +5,7 @@ import { DatabaseService } from "../database.service";
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly databaseService: DatabaseService) {}
+    constructor(private readonly databaseService: DatabaseService) { }
 
     async addDefaultUserIfNeeded(): Promise<void> {
         try {
@@ -20,25 +20,29 @@ export class UsersService {
                 return;
             }
 
-                await this.addUser({name, password, level})
-            }
-         catch (error) {
+            await this.addUser({ name, password, level })
+        }
+        catch (error) {
             console.error('Error adding default user:', error)
         }
     }
 
     async addUser(@Body() { name, password, level }: usersDto): Promise<void> {
-        
-           let insertResult = this.databaseService.query('INSERT INTO users (name, password, level) VALUES (?, ?, ?)', [name, password, level])
-                if (insertResult) {
-                    console.log('Admin added successfully:',)
-                } else {
-                    console.error('Admin already exist')
-                    
-                }
+
+        let insertResult = this.databaseService.query('INSERT INTO users (name, password, level) VALUES (?, ?, ?)', [name, password, level])
+        if (insertResult) {
+            console.log('Admin added successfully:',)
+        } else {
+            console.error('Admin already exist')
+
         }
+    }
 
     async findAll(): Promise<any[]> {
         return await this.databaseService.query('SELECT * FROM users')
     }
+
+    async loginUser(email: string, password: string): Promise<any> {
+        return await this.databaseService.query('SELECT * FROM users WHERE name = ? AND password = ?', [email, password])
     }
+}
