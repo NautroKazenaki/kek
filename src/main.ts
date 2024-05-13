@@ -7,7 +7,7 @@ import { UsersService } from './database/users/users.service';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
    app.enableCors({
-    origin:'192.168.0.*',
+    origin:'*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Accept',
    })
