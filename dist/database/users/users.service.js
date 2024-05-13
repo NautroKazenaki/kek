@@ -49,6 +49,9 @@ let UsersService = class UsersService {
     async findAll() {
         return await this.databaseService.query('SELECT * FROM users');
     }
+    async loginUser(email, password) {
+        return await this.databaseService.query('SELECT * FROM users WHERE name = ? AND password = ?', [email, password]);
+    }
 };
 exports.UsersService = UsersService;
 __decorate([
