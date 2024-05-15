@@ -24,6 +24,11 @@ let ProvidersService = class ProvidersService {
         const params = [trimmedName];
         return await this.databaseService.query(sql, params);
     }
+    async deleteProvider(providerNameToRemove) {
+        const sql = 'DELETE FROM providers WHERE name = ?';
+        const params = [providerNameToRemove];
+        return await this.databaseService.query(sql, params);
+    }
 };
 exports.ProvidersService = ProvidersService;
 exports.ProvidersService = ProvidersService = __decorate([

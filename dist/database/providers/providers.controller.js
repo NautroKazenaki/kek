@@ -25,6 +25,9 @@ let ProvidersController = class ProvidersController {
     async addProvider(body) {
         await this.providersService.addProvider(body.trimmedName);
     }
+    async deleteProvider(providerNameToRemove) {
+        await this.providersService.deleteProvider(providerNameToRemove);
+    }
 };
 exports.ProvidersController = ProvidersController;
 __decorate([
@@ -40,6 +43,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ProvidersController.prototype, "addProvider", null);
+__decorate([
+    (0, common_1.Delete)(':providerNameToRemove'),
+    __param(0, (0, common_1.Param)('providerNameToRemove')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProvidersController.prototype, "deleteProvider", null);
 exports.ProvidersController = ProvidersController = __decorate([
     (0, common_1.Controller)('providers'),
     __metadata("design:paramtypes", [providers_service_1.ProvidersService])

@@ -6,4 +6,5 @@ export declare class ProvidersController {
     addProvider(body: {
         trimmedName: string;
     }): Promise<void>;
+    deleteProvider(providerNameToRemove: string): Promise<void>;
 }

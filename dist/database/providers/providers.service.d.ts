@@ -4,4 +4,5 @@ export declare class ProvidersService {
     constructor(databaseService: DatabaseService);
     getAllProviders(): Promise<any[]>;
     addProvider(trimmedName: string): Promise<any>;
+    deleteProvider(providerNameToRemove: string): Promise<any>;
 }
