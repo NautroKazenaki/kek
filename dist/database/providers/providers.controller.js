@@ -12,37 +12,36 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersController = void 0;
+exports.ProvidersController = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("./users.service");
-let UsersController = class UsersController {
-    constructor(usersService) {
-        this.usersService = usersService;
+const providers_service_1 = require("./providers.service");
+let ProvidersController = class ProvidersController {
+    constructor(providersService) {
+        this.providersService = providersService;
     }
-    async loginUser(userData) {
-        const { name, password } = userData;
-        return await this.usersService.loginUser(name, password);
+    async getAllProviders() {
+        return await this.providersService.getAllProviders();
     }
-    async findAll() {
-        return await this.usersService.findAll();
+    async addProvider(body) {
+        await this.providersService.addProvider(body.trimmedName);
     }
 };
-exports.UsersController = UsersController;
+exports.ProvidersController = ProvidersController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ProvidersController.prototype, "getAllProviders", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "loginUser", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "findAll", null);
-exports.UsersController = UsersController = __decorate([
-    (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
-], UsersController);
-//# sourceMappingURL=users.controller.js.map
+], ProvidersController.prototype, "addProvider", null);
+exports.ProvidersController = ProvidersController = __decorate([
+    (0, common_1.Controller)('providers'),
+    __metadata("design:paramtypes", [providers_service_1.ProvidersService])
+], ProvidersController);
+//# sourceMappingURL=providers.controller.js.map

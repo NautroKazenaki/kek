@@ -20,6 +20,12 @@ export class DatabaseModule implements OnModuleInit {
               password TEXT,
               level INTEGER
             )
+          `),
+          db.run(`
+          CREATE TABLE IF NOT EXISTS providers (
+            id INTEGER PRIMARY KEY,
+            name TEXT, 
+            error_count INTEGER)
           `)
         })
     }

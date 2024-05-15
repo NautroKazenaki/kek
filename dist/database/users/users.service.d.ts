@@ -6,5 +6,5 @@ export declare class UsersService {
     addDefaultUserIfNeeded(): Promise<void>;
     addUser({ name, password, level }: usersDto): Promise<void>;
     findAll(): Promise<any[]>;
-    loginUser(email: string, password: string): Promise<any>;
+    loginUser(name: string, password: string): Promise<any>;
 }

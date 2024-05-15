@@ -9,40 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DatabaseModule = void 0;
+exports.ProvidersService = void 0;
 const common_1 = require("@nestjs/common");
-const sqlite3 = require("sqlite3");
-const database_service_1 = require("./database.service");
-let DatabaseModule = class DatabaseModule {
+const database_service_1 = require("../database.service");
+let ProvidersService = class ProvidersService {
     constructor(databaseService) {
         this.databaseService = databaseService;
     }
-    async onModuleInit() {
-        const db = new sqlite3.Database('database.db');
-        db.serialize(() => {
-            db.run(`
-            CREATE TABLE IF NOT EXISTS users (
-              id INTEGER PRIMARY KEY,
-              name TEXT,
-              password TEXT,
-              level INTEGER
-            )
-          `),
-                db.run(`
-          CREATE TABLE IF NOT EXISTS providers (
-            id INTEGER PRIMARY KEY,
-            name TEXT, 
-            error_count INTEGER)
-          `);
-        });
+    async getAllProviders() {
+        return await this.databaseService.query('SELECT * FROM providers');
+    }
+    async addProvider(trimmedName) {
+        const sql = 'INSERT INTO providers (name) VALUES (?)';
+        const params = [trimmedName];
+        return await this.databaseService.query(sql, params);
     }
 };
-exports.DatabaseModule = DatabaseModule;
-exports.DatabaseModule = DatabaseModule = __decorate([
-    (0, common_1.Module)({
-        providers: [database_service_1.DatabaseService],
-        exports: [database_service_1.DatabaseService],
-    }),
+exports.ProvidersService = ProvidersService;
+exports.ProvidersService = ProvidersService = __decorate([
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [database_service_1.DatabaseService])
-], DatabaseModule);
-//# sourceMappingURL=database.module.js.map
+], ProvidersService);
+//# sourceMappingURL=providers.service.js.map
