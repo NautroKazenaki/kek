@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const users_module_1 = require("./database/users/users.module");
 const database_module_1 = require("./database/database.module");
 const providers_module_1 = require("./database/providers/providers.module");
+const acceptance_module_1 = require("./database/acceptance/acceptance.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -27,7 +28,7 @@ let AppModule = class AppModule {
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule, users_module_1.UsersModule, providers_module_1.ProvidersModule],
+        imports: [database_module_1.DatabaseModule, users_module_1.UsersModule, providers_module_1.ProvidersModule, acceptance_module_1.AcceptanceModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
