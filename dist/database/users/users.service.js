@@ -8,13 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const users_dto_1 = require("./users.dto");
 const database_service_1 = require("../database.service");
 let UsersService = class UsersService {
     constructor(databaseService) {
@@ -38,12 +34,22 @@ let UsersService = class UsersService {
         }
     }
     async addUser({ name, password, level }) {
-        let insertResult = this.databaseService.query('INSERT INTO users (name, password, level) VALUES (?, ?, ?)', [name, password, level]);
-        if (insertResult) {
-            console.log('Admin added successfully:');
+        try {
+            let sql = 'SELECT * FROM users WHERE name = ?';
+            let params = [name];
+            const existingUser = await this.databaseService.query(sql, params);
+            if (existingUser.length > 0) {
+                throw new Error('User already exists');
+            }
+            else {
+                let sql = 'INSERT INTO users (name, password, level) VALUES (?, ?, ?)';
+                let params = [name, password, level];
+                await this.databaseService.query(sql, params);
+                console.log('User added successfully:');
+            }
         }
-        else {
-            console.error('Admin already exist');
+        catch (error) {
+            console.error('Error adding user:', error);
         }
     }
     async findAll() {
@@ -54,14 +60,18 @@ let UsersService = class UsersService {
         const params = [name, password];
         return await this.databaseService.query(sql, params);
     }
+    async deleteUser(name) {
+        try {
+            let sql = 'DELETE FROM users WHERE name = ?';
+            let params = [name];
+            await this.databaseService.query(sql, params);
+        }
+        catch {
+            console.error('error deleting user:', name);
+        }
+    }
 };
 exports.UsersService = UsersService;
-__decorate([
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [users_dto_1.usersDto]),
-    __metadata("design:returntype", Promise)
-], UsersService.prototype, "addUser", null);
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [database_service_1.DatabaseService])

@@ -23,6 +23,25 @@ let UsersController = class UsersController {
         const { name, password } = userData;
         return await this.usersService.loginUser(name, password);
     }
+    async addUser(name, userData) {
+        const { password, level } = userData;
+        try {
+            await this.usersService.addUser({ name, password, level });
+            console.log('User added successfully');
+        }
+        catch (error) {
+            console.error('User already exist:' + error);
+        }
+    }
+    async deleteUser(name) {
+        try {
+            await this.usersService.deleteUser(name);
+            console.log('User deleted successfully:' + name);
+        }
+        catch (error) {
+            console.error('User not found:' + error);
+        }
+    }
     async findAll() {
         return await this.usersService.findAll();
     }
@@ -35,6 +54,21 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "loginUser", null);
+__decorate([
+    (0, common_1.Post)(':name'),
+    __param(0, (0, common_1.Param)('name')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "addUser", null);
+__decorate([
+    (0, common_1.Delete)(':name'),
+    __param(0, (0, common_1.Param)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "deleteUser", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

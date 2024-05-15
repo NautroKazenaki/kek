@@ -7,4 +7,5 @@ export declare class UsersService {
     addUser({ name, password, level }: usersDto): Promise<void>;
     findAll(): Promise<any[]>;
     loginUser(name: string, password: string): Promise<any>;
+    deleteUser(name: string): Promise<void>;
 }

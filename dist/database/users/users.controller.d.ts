@@ -6,5 +6,10 @@ export declare class UsersController {
         name: string;
         password: string;
     }): Promise<void>;
+    addUser(name: string, userData: {
+        password: string;
+        level: number;
+    }): Promise<void>;
+    deleteUser(name: string): Promise<void>;
     findAll(): Promise<any[]>;
 }
