@@ -53,6 +53,14 @@ let DatabaseModule = class DatabaseModule {
             provider TEXT,
             included TEXT
           )
+        `),
+                db.run(`
+        CREATE TABLE IF NOT EXISTS Products (
+          id INTEGER PRIMARY KEY,
+          productName TEXT,
+          includedDetails TEXT,
+          createLimit INTEGER
+      )
         `);
         });
     }

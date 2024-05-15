@@ -9,4 +9,9 @@ export class DetailsController {
     async addDetail(@Body() body: any): Promise<void> {
         return await this.detailsService.addDetail(body)
     }
+
+    @Get()
+    async getDetails(): Promise<any[]> {
+        return await this.detailsService.getDetails()
+    }
 }

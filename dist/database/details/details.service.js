@@ -39,6 +39,14 @@ let DetailsService = class DetailsService {
             console.error(error);
         }
     }
+    async getDetails() {
+        try {
+            return await this.databaseService.query('SELECT * FROM Details');
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
 };
 exports.DetailsService = DetailsService;
 __decorate([

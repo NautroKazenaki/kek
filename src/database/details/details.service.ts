@@ -25,4 +25,12 @@ export class DetailsService {
             console.error(error)
         }
     }
+
+    async getDetails(): Promise<any[]> {
+        try {
+            return await this.databaseService.query('SELECT * FROM Details')
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }

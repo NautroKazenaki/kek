@@ -3,4 +3,5 @@ export declare class DetailsService {
     private readonly databaseService;
     constructor(databaseService: DatabaseService);
     addDetail(body: any): Promise<void>;
+    getDetails(): Promise<any[]>;
 }
