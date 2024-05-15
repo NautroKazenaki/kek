@@ -1,7 +1,6 @@
 import { DatabaseService } from "../database.service";
-export declare class AcceptanceService {
+export declare class DetailsService {
     private readonly databaseService;
     constructor(databaseService: DatabaseService);
-    addStuff(body: any): Promise<any[]>;
-    getAcceptanceData(): Promise<any[]>;
+    addDetail(body: any): Promise<void>;
 }

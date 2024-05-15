@@ -12,36 +12,43 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AcceptanceService = void 0;
+exports.DetailsService = void 0;
 const common_1 = require("@nestjs/common");
 const database_service_1 = require("../database.service");
-let AcceptanceService = class AcceptanceService {
+let DetailsService = class DetailsService {
     constructor(databaseService) {
         this.databaseService = databaseService;
     }
-    async addStuff(body) {
-        const sql = 'INSERT INTO AcceptanceDB (userName, date, productName, quantity, provider, acceptanceNumber) VALUES (?, ?, ?, ?, ?, ?)';
-        const params = [body.username, body.currentDateTime, body.name, body.quantity, body.selectedProvider, body.acceptanceCounter];
-        return await this.databaseService.query(sql, params);
-    }
-    async getAcceptanceData() {
+    async addDetail(body) {
         try {
-            return await this.databaseService.query('SELECT * FROM AcceptanceDB ORDER BY acceptanceNumber DESC, id DESC');
+            let sql = 'SELECT * FROM Details WHERE detailName = ? AND provider = ?';
+            let params = [body.name, body.selectedProvider];
+            const existingDetail = await this.databaseService.query(sql, params);
+            if (existingDetail.length > 0) {
+                sql = 'UPDATE Details SET quantity = quantity + ? WHERE detailName = ? AND provider = ?';
+                params = [body.quantity, body.name, body.selectedProvider];
+                await this.databaseService.query(sql, params);
+            }
+            else {
+                sql = 'INSERT INTO Details (detailName, provider, quantity) VALUES (?, ?, ?)';
+                params = [body.name, body.selectedProvider, body.quantity];
+                await this.databaseService.query(sql, params);
+            }
         }
         catch (error) {
-            console.error('Error fetching data from AcceptanceDB:', error);
+            console.error(error);
         }
     }
 };
-exports.AcceptanceService = AcceptanceService;
+exports.DetailsService = DetailsService;
 __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], AcceptanceService.prototype, "addStuff", null);
-exports.AcceptanceService = AcceptanceService = __decorate([
+], DetailsService.prototype, "addDetail", null);
+exports.DetailsService = DetailsService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [database_service_1.DatabaseService])
-], AcceptanceService);
-//# sourceMappingURL=acceptance.service.js.map
+], DetailsService);
+//# sourceMappingURL=details.service.js.map

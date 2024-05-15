@@ -9,4 +9,9 @@ export class AcceptanceController {
     async addStuff(@Body() body:any): Promise<any[]> {
         return await this.acceptanceService.addStuff(body)
     }
+
+    @Get()
+    async getAcceptanceData(): Promise<any[]> {
+        return await this.acceptanceService.getAcceptanceData()
+    }
 }

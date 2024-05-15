@@ -12,36 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AcceptanceController = void 0;
+exports.DetailsController = void 0;
 const common_1 = require("@nestjs/common");
-const acceptance_service_1 = require("./acceptance.service");
-let AcceptanceController = class AcceptanceController {
-    constructor(acceptanceService) {
-        this.acceptanceService = acceptanceService;
+const details_service_1 = require("./details.service");
+let DetailsController = class DetailsController {
+    constructor(detailsService) {
+        this.detailsService = detailsService;
     }
-    async addStuff(body) {
-        return await this.acceptanceService.addStuff(body);
-    }
-    async getAcceptanceData() {
-        return await this.acceptanceService.getAcceptanceData();
+    async addDetail(body) {
+        return await this.detailsService.addDetail(body);
     }
 };
-exports.AcceptanceController = AcceptanceController;
+exports.DetailsController = DetailsController;
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], AcceptanceController.prototype, "addStuff", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], AcceptanceController.prototype, "getAcceptanceData", null);
-exports.AcceptanceController = AcceptanceController = __decorate([
-    (0, common_1.Controller)('acceptance'),
-    __metadata("design:paramtypes", [acceptance_service_1.AcceptanceService])
-], AcceptanceController);
-//# sourceMappingURL=acceptance.controller.js.map
+], DetailsController.prototype, "addDetail", null);
+exports.DetailsController = DetailsController = __decorate([
+    (0, common_1.Controller)('details'),
+    __metadata("design:paramtypes", [details_service_1.DetailsService])
+], DetailsController);
+//# sourceMappingURL=details.controller.js.map
