@@ -53,6 +53,17 @@ export class DatabaseModule implements OnModuleInit {
           productName TEXT,
           includedDetails TEXT,
           createLimit INTEGER
+        )
+        `),
+        db.run(`
+        CREATE TABLE IF NOT EXISTS Orders (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          startDate TEXT NOT NULL,
+          endDate TEXT DEFAULT NULL,
+          isDone INTEGER DEFAULT 0,
+          userName TEXT NOT NULL,
+          includedProducts TEXT NOT NULL,
+          orderTo TEXT
       )
         `)
     })

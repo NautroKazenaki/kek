@@ -20,7 +20,7 @@ let ProductsService = class ProductsService {
         this.databaseService = databaseService;
     }
     async getProducts() {
-        return this.databaseService.query('SELECT * FROM products');
+        return await this.databaseService.query('SELECT * FROM products');
     }
     async addProduct(body) {
         let sql = 'INSERT INTO Products (productName, includedDetails) VALUES (?, ?)';

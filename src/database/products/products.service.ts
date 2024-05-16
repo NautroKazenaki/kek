@@ -7,7 +7,7 @@ export class ProductsService {
     constructor(private readonly databaseService: DatabaseService) {}
 
     async getProducts(): Promise<any[]> {
-        return this.databaseService.query('SELECT * FROM products');
+        return await this.databaseService.query('SELECT * FROM products');
     }
 
     async addProduct(@Body() body: any): Promise<any[]> {
