@@ -49,4 +49,14 @@ export class ProductsService {
             throw error; // Rethrow the error to handle it elsewhere if needed
         }
     }
+
+    async deleteProduct(id: string): Promise<void> {
+        try {
+            let sql = 'DELETE FROM products WHERE productName = ?';
+            let params = [id];
+            await this.databaseService.query(sql, params);
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    }
 }

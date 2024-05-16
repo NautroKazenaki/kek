@@ -25,4 +25,9 @@ export class ProductsController {
     async updateProduct(@Param('selectedName') selectedName: string, @Body() body: any): Promise<any[]> {
         return await this.productsService.updateProduct(selectedName, body)
     }
+
+    @Delete(':id')
+    async deleteProduct(@Param('id') id: string): Promise<void> {
+        return await this.productsService.deleteProduct(id)
+    }
 }

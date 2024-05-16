@@ -56,6 +56,16 @@ let ProductsService = class ProductsService {
             throw error;
         }
     }
+    async deleteProduct(id) {
+        try {
+            let sql = 'DELETE FROM products WHERE productName = ?';
+            let params = [id];
+            await this.databaseService.query(sql, params);
+        }
+        catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    }
 };
 exports.ProductsService = ProductsService;
 __decorate([

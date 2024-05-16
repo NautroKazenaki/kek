@@ -6,4 +6,5 @@ export declare class ProductsController {
     addProduct(body: any): Promise<any[]>;
     addProductFromExcel(body: any): Promise<void>;
     updateProduct(selectedName: string, body: any): Promise<any[]>;
+    deleteProduct(id: string): Promise<void>;
 }
