@@ -33,6 +33,16 @@ let OrdersService = class OrdersService {
         let params = [id];
         return await this.databaseService.query(sql, params);
     }
+    async getManufacturingStatus(body) {
+        const sql = 'SELECT * FROM ManufacturingStatus WHERE orderId = ?';
+        const params = [body.selectedOrder];
+        return await this.databaseService.query(sql, params);
+    }
+    async getOrderById(body) {
+        const sql = 'SELECT * FROM Orders WHERE id = ?';
+        const params = [body.selectedOrder];
+        return await this.databaseService.query(sql, params);
+    }
 };
 exports.OrdersService = OrdersService;
 __decorate([
@@ -41,6 +51,18 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], OrdersService.prototype, "addOrder", null);
+__decorate([
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrdersService.prototype, "getManufacturingStatus", null);
+__decorate([
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrdersService.prototype, "getOrderById", null);
 exports.OrdersService = OrdersService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [database_service_1.DatabaseService])

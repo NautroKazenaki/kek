@@ -28,6 +28,12 @@ let OrdersController = class OrdersController {
     async deleteOrder(id) {
         return await this.ordersService.deleteOrder(id);
     }
+    async getManufacturingStatus(body) {
+        return await this.ordersService.getManufacturingStatus(body);
+    }
+    async getOrderById(body) {
+        return await this.ordersService.getOrderById(body);
+    }
 };
 exports.OrdersController = OrdersController;
 __decorate([
@@ -50,6 +56,20 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], OrdersController.prototype, "deleteOrder", null);
+__decorate([
+    (0, common_1.Get)('get-manufacturing-status'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrdersController.prototype, "getManufacturingStatus", null);
+__decorate([
+    (0, common_1.Get)('get-order-by-id'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], OrdersController.prototype, "getOrderById", null);
 exports.OrdersController = OrdersController = __decorate([
     (0, common_1.Controller)('orders'),
     __metadata("design:paramtypes", [orders_service_1.OrdersService])

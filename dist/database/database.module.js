@@ -72,6 +72,30 @@ let DatabaseModule = class DatabaseModule {
           includedProducts TEXT NOT NULL,
           orderTo TEXT
       )
+        `),
+                db.run(`
+        CREATE TABLE IF NOT EXISTS ManufacturingStatus (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          orderId INTEGER NOT NULL,
+          productId INTEGER NOT NULL,
+          manufactured INTEGER DEFAULT 0,
+          FOREIGN KEY (orderId) REFERENCES Orders(id),
+          FOREIGN KEY (productId) REFERENCES Products(id)
+      )
+        `),
+                db.run(`
+        CREATE TABLE IF NOT EXISTS ProductsInDevelopment (
+          id INTEGER ,
+          productName TEXT,
+          part INTEGER,
+          manufacturer TEXT,
+          startDateOfManufacturer TEXT PRIMARY KEY,
+          endDateOfManufacturer TEXT DEFAULT NULL,
+          comments TEXT ARRAY,
+          additionalDetails JSON ARRAY,
+          phase INTEGER,
+          partOfOrder INTEGER
+      )
         `);
         });
     }

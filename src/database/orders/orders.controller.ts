@@ -17,4 +17,12 @@ export class OrdersController {
     async deleteOrder(@Param('id') id: string): Promise<any[]> {
         return await this.ordersService.deleteOrder(id)
     }
+    @Get('get-manufacturing-status')
+    async getManufacturingStatus(@Body() body: any): Promise<any[]> {
+        return await this.ordersService.getManufacturingStatus(body)
+    }
+    @Get('get-order-by-id')
+    async getOrderById(@Body() body: any): Promise<any[]> {
+        return await this.ordersService.getOrderById(body)
+    }
 }

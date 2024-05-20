@@ -22,4 +22,28 @@ export class DatabaseService {
             } )
         })
     }
+
+    runQuery(sql: string, params: any[] = []): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.db.run(sql, params, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    }
+
+    getQuery(sql: string, params: any[] = []): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.db.get(sql, params, (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    }
 }

@@ -34,6 +34,12 @@ let ProductsController = class ProductsController {
     async deleteProduct(id) {
         return await this.productsService.deleteProduct(id);
     }
+    async subtractDetails(body) {
+        return this.productsService.subtractDetails(body);
+    }
+    async updateProductManufactured(body) {
+        return this.productsService.updateProductManufactured(body);
+    }
 };
 exports.ProductsController = ProductsController;
 __decorate([
@@ -71,6 +77,20 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "deleteProduct", null);
+__decorate([
+    (0, common_1.Post)('subtract-details'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "subtractDetails", null);
+__decorate([
+    (0, common_1.Post)('update-product-manufactured'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "updateProductManufactured", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])

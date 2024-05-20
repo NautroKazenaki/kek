@@ -66,6 +66,65 @@ let ProductsService = class ProductsService {
             console.error('Error deleting product:', error);
         }
     }
+    async subtractDetails(body) {
+        console.log(body);
+        const { selectedOrder: orderId, productName, includedDetails: requiredDetails } = body;
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.databaseService.runQuery('BEGIN TRANSACTION');
+                console.log(orderId);
+                const order = await this.databaseService.getQuery('SELECT includedProducts FROM orders WHERE id = ?', [orderId]);
+                const includedProducts = JSON.parse(order.includedProducts);
+                console.log(includedProducts + '123123');
+                const includedProduct = includedProducts.find(product => product.productName === productName);
+                if (!includedProduct) {
+                    throw new Error(`Product ${productName} not found in the order`);
+                }
+                const quantityNeededMultiply = includedProduct.quantity;
+                const detailsToUpdate = requiredDetails.map(detail => {
+                    const newQuantity = (detail.quantity * quantityNeededMultiply) * -1;
+                    return {
+                        detailName: detail.detailName,
+                        quantity: newQuantity,
+                    };
+                });
+                const updatedDetails = await Promise.all(detailsToUpdate.map(detail => this.databaseService.query('SELECT * FROM Details WHERE detailName = ?', [detail.detailName])
+                    .then(existingDetail => {
+                    if (existingDetail.length > 0) {
+                        const newQuantity = existingDetail[0].quantity + detail.quantity;
+                        if (newQuantity < 0) {
+                            throw new Error(`Not enough quantity for detail: ${detail.detailName}`);
+                        }
+                        return this.databaseService.runQuery('UPDATE Details SET quantity = ? WHERE id = ?', [newQuantity, existingDetail[0].id]);
+                    }
+                    else {
+                        return this.databaseService.runQuery('INSERT INTO Details (detailName, quantity) VALUES (?, ?)', [detail.detailName, detail.quantity]);
+                    }
+                })));
+                await this.databaseService.runQuery('COMMIT');
+                resolve();
+            }
+            catch (error) {
+                reject(new common_1.InternalServerErrorException(error.message));
+            }
+        });
+    }
+    async updateProductManufactured(body) {
+        const { selectedOrder, productName, manufactured } = body;
+        const existingOrder = await this.databaseService.query('SELECT includedProducts FROM Orders WHERE id = ?', [selectedOrder]);
+        if (existingOrder.length === 0) {
+            throw new Error(`Order ${selectedOrder} not found`);
+        }
+        const includedProducts = JSON.parse(existingOrder[0].includedProducts);
+        const productIndex = includedProducts.findIndex(product => product.productName === productName);
+        if (productIndex === -1) {
+            throw new Error(`Product ${productName} not found in the order`);
+        }
+        includedProducts[productIndex].manufactured = manufactured ? 1 : 0;
+        const sql = `UPDATE Orders SET includedProducts = ? WHERE id = ?`;
+        const params = [JSON.stringify(includedProducts), selectedOrder];
+        return await this.databaseService.runQuery(sql, params);
+    }
 };
 exports.ProductsService = ProductsService;
 __decorate([

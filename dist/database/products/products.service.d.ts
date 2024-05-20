@@ -7,4 +7,6 @@ export declare class ProductsService {
     updateProduct(selectedName: string, body: any): Promise<any[]>;
     addProductFromExcel(body: any): Promise<void>;
     deleteProduct(id: string): Promise<void>;
+    subtractDetails(body: any): Promise<void>;
+    updateProductManufactured(body: any): Promise<void>;
 }

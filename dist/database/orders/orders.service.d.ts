@@ -5,4 +5,6 @@ export declare class OrdersService {
     getOrders(): Promise<any[]>;
     addOrder(body: any): Promise<any[]>;
     deleteOrder(id: string): Promise<any[]>;
+    getManufacturingStatus(body: any): Promise<any[]>;
+    getOrderById(body: any): Promise<any[]>;
 }

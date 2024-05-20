@@ -30,4 +30,13 @@ export class ProductsController {
     async deleteProduct(@Param('id') id: string): Promise<void> {
         return await this.productsService.deleteProduct(id)
     }
+    @Post('subtract-details')
+    async subtractDetails(@Body() body: any): Promise<void> {
+        return this.productsService.subtractDetails(body)
+    }
+
+    @Post('update-product-manufactured')
+    async updateProductManufactured(@Body() body: any): Promise<void> {
+        return this.productsService.updateProductManufactured(body)
+    }
 }

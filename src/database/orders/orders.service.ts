@@ -22,4 +22,17 @@ export class OrdersService {
         let params = [id];
         return await this.databaseService.query(sql, params)
     }
+
+    async getManufacturingStatus(@Body() body: any): Promise<any[]> {
+        const sql = 'SELECT * FROM ManufacturingStatus WHERE orderId = ?'
+        const params = [body.selectedOrder]
+        return await this.databaseService.query(sql, params)
+    }
+
+    async getOrderById(@Body() body: any): Promise<any[]> {
+        const sql = 'SELECT * FROM Orders WHERE id = ?'
+        const params = [body.selectedOrder]
+        return await this.databaseService.query(sql, params)
+    }
+
 }
