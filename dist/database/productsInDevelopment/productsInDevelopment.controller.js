@@ -22,6 +22,18 @@ let ProductsInDevelopmentController = class ProductsInDevelopmentController {
     setManfuctaringData(body) {
         return this.productsInDevelopmentService.setManfuctaringData(body);
     }
+    getManfuctaringData() {
+        return this.productsInDevelopmentService.getManfuctaringData();
+    }
+    updatePhase(id, phase) {
+        return this.productsInDevelopmentService.updatePhase(id, phase);
+    }
+    setEndDate(id, manufacturingData) {
+        return this.productsInDevelopmentService.setEndDate(id, manufacturingData);
+    }
+    setComments(id, body) {
+        return this.productsInDevelopmentService.setComment(id, body);
+    }
 };
 exports.ProductsInDevelopmentController = ProductsInDevelopmentController;
 __decorate([
@@ -31,6 +43,36 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], ProductsInDevelopmentController.prototype, "setManfuctaringData", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ProductsInDevelopmentController.prototype, "getManfuctaringData", null);
+__decorate([
+    (0, common_1.Put)(':id/phase'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('phase')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number]),
+    __metadata("design:returntype", void 0)
+], ProductsInDevelopmentController.prototype, "updatePhase", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], ProductsInDevelopmentController.prototype, "setEndDate", null);
+__decorate([
+    (0, common_1.Put)(':id/comment'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], ProductsInDevelopmentController.prototype, "setComments", null);
 exports.ProductsInDevelopmentController = ProductsInDevelopmentController = __decorate([
     (0, common_1.Controller)('productsInDevelopment'),
     __metadata("design:paramtypes", [productsInDevelopment_service_1.ProductsInDevelopmentService])
