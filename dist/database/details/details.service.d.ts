@@ -4,4 +4,5 @@ export declare class DetailsService {
     constructor(databaseService: DatabaseService);
     addDetail(body: any): Promise<void>;
     getDetails(): Promise<any[]>;
+    updateDetailQuantity(detailName: any, body: any): Promise<void>;
 }

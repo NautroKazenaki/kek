@@ -25,6 +25,10 @@ let DetailsController = class DetailsController {
     async getDetails() {
         return await this.detailsService.getDetails();
     }
+    async updateDetailQuantity(detailName, body) {
+        console.log(body);
+        return await this.detailsService.updateDetailQuantity(detailName, body);
+    }
 };
 exports.DetailsController = DetailsController;
 __decorate([
@@ -40,6 +44,14 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], DetailsController.prototype, "getDetails", null);
+__decorate([
+    (0, common_1.Put)(':detailName'),
+    __param(0, (0, common_1.Param)('detailName')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], DetailsController.prototype, "updateDetailQuantity", null);
 exports.DetailsController = DetailsController = __decorate([
     (0, common_1.Controller)('details'),
     __metadata("design:paramtypes", [details_service_1.DetailsService])

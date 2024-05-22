@@ -47,6 +47,24 @@ let DetailsService = class DetailsService {
             console.error(error);
         }
     }
+    async updateDetailQuantity(detailName, body) {
+        try {
+            let allDetails = await this.getDetails();
+            const existingDetail = allDetails.find(d => d.detailName === detailName);
+            if (existingDetail) {
+                let newQuantity = existingDetail.quantity - body.quantity;
+                if (newQuantity < 0) {
+                    throw new Error(`Not enough ${detailName} in stock`);
+                }
+                let sql = `UPDATE Details SET quantity = ? WHERE detailName = ?`;
+                let params = [newQuantity, detailName];
+                await this.databaseService.query(sql, params);
+            }
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }
 };
 exports.DetailsService = DetailsService;
 __decorate([

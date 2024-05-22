@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {DetailsService} from "./details.service";
 
 @Controller('details')
@@ -13,5 +13,11 @@ export class DetailsController {
     @Get()
     async getDetails(): Promise<any[]> {
         return await this.detailsService.getDetails()
+    }
+
+    @Put(':detailName')
+    async updateDetailQuantity( @Param('detailName') detailName: string, @Body() body: any): Promise<void> {
+        console.log(body)
+        return await this.detailsService.updateDetailQuantity(detailName, body)
     }
 }
