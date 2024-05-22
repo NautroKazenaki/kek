@@ -67,12 +67,39 @@ export class ProductsInDevelopmentService {
                     existingComments.push(body.comment);
                     // Convert the updated comments array back to JSON
                     const updatedComments = JSON.stringify(existingComments);
-    
+
                     // Update the database with the new comments
                     return this.databaseService.query('UPDATE ProductsInDevelopment SET comments = ? WHERE id = ?', [updatedComments, id]);
                 })
                 .then(() => resolve())
                 .catch(error => reject(error));
         });
+    }
+    async updateProductAdditionalDetails(body: any): Promise<void> {
+        let productsInDevelopment = await this.databaseService.query('SELECT * FROM ProductsInDevelopment');
+        let product = productsInDevelopment.find(product => product.id === body.cardId);
+        if (product) {
+            if (!product.additionalDetails) {
+                product.additionalDetails = [];
+            } else if (!Array.isArray(product.additionalDetails)) {
+                product.additionalDetails = JSON.parse(product.additionalDetails);
+            }
+            product.additionalDetails.push({ detailName: body.detail, quantity: body.quantity });
+            const additionalDetailsString = JSON.stringify(product.additionalDetails);
+            const sql = `UPDATE ProductsInDevelopment SET additionalDetails = ? WHERE id = ?`;
+            const params = [additionalDetailsString, body.cardId];
+            return await this.databaseService.runQuery(sql, params);
+        }
+    }
+    async updateProductComments(body: any): Promise<any[]> {
+        let productsInDevelopment = await this.databaseService.query('SELECT * FROM ProductsInDevelopment');
+        let product = productsInDevelopment.find(product => product.id === body.cardId);
+        if (product) {
+            product.comments = product.comments ? JSON.parse(product.comments) : [];
+            product.comments.push(body.comment);
+            const sql = `UPDATE ProductsInDevelopment SET comments = ? WHERE id = ?`;
+            const params = [JSON.stringify(product.comments), body.cardId];
+            return await this.databaseService.query(sql, params);
+        }
     }
 }

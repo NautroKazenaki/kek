@@ -7,4 +7,6 @@ export declare class ProductsInDevelopmentService {
     updatePhase(id: any, phase: number): Promise<void>;
     setEndDate(id: any, manufacturingData: any): Promise<void>;
     setComment(id: any, body: any): Promise<void>;
+    updateProductAdditionalDetails(body: any): Promise<void>;
+    updateProductComments(body: any): Promise<any[]>;
 }

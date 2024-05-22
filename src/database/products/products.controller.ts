@@ -20,6 +20,7 @@ export class ProductsController {
     async addProductFromExcel(@Body() body: any): Promise<void> {
         await this.productsService.addProductFromExcel(body)
     }
+   
 
     @Put(':selectedName')
     async updateProduct(@Param('selectedName') selectedName: string, @Body() body: any): Promise<any[]> {

@@ -25,6 +25,12 @@ let ProductsInDevelopmentController = class ProductsInDevelopmentController {
     getManfuctaringData() {
         return this.productsInDevelopmentService.getManfuctaringData();
     }
+    async updateProductAdditionalDetails(body) {
+        return await this.productsInDevelopmentService.updateProductAdditionalDetails(body);
+    }
+    async updateProductComments(body) {
+        return await this.productsInDevelopmentService.updateProductComments(body);
+    }
     updatePhase(id, phase) {
         return this.productsInDevelopmentService.updatePhase(id, phase);
     }
@@ -49,6 +55,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ProductsInDevelopmentController.prototype, "getManfuctaringData", null);
+__decorate([
+    (0, common_1.Put)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductsInDevelopmentController.prototype, "updateProductAdditionalDetails", null);
+__decorate([
+    (0, common_1.Put)('/additionalComments'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductsInDevelopmentController.prototype, "updateProductComments", null);
 __decorate([
     (0, common_1.Put)(':id/phase'),
     __param(0, (0, common_1.Param)('id')),

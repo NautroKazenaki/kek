@@ -15,6 +15,15 @@ export class ProductsInDevelopmentController {
         return this.productsInDevelopmentService.getManfuctaringData();
     }
 
+    @Put()
+    async updateProductAdditionalDetails(@Body() body: any): Promise<void> {
+        return await this.productsInDevelopmentService.updateProductAdditionalDetails(body)
+    }
+    @Put('/additionalComments')
+    async updateProductComments(@Body() body: any): Promise<any[]> {
+        return await this.productsInDevelopmentService.updateProductComments(body)
+    }
+
     @Put(':id/phase')
     updatePhase(@Param('id') id: any, @Body('phase') phase: number) {
         return this.productsInDevelopmentService.updatePhase(id, phase);

@@ -4,6 +4,8 @@ export declare class ProductsInDevelopmentController {
     constructor(productsInDevelopmentService: ProductsInDevelopmentService);
     setManfuctaringData(body: any): Promise<void>;
     getManfuctaringData(): Promise<any[]>;
+    updateProductAdditionalDetails(body: any): Promise<void>;
+    updateProductComments(body: any): Promise<any[]>;
     updatePhase(id: any, phase: number): Promise<void>;
     setEndDate(id: any, manufacturingData: any): Promise<void>;
     setComments(id: any, body: any): Promise<void>;
