@@ -9,13 +9,14 @@ import { DetailsModule } from './database/details/details.module';
 import { ProductsModule } from './database/products/products.module';
 import { OrdersModule } from './database/orders/orders.module';
 import { ProductsInDevelopmentModule } from './database/productsInDevelopment/productsInDevelopment.module';
+import { ArchieveModule } from './database/archieve/archieve.module';
 
 
 @Module({
   imports: [
     DatabaseModule, UsersModule, ProvidersModule, 
     AcceptanceModule, DetailsModule, ProductsModule,
-    OrdersModule, ProductsInDevelopmentModule ],
+    OrdersModule, ProductsInDevelopmentModule, ArchieveModule ],
   controllers: [AppController],
   providers: [AppService],
 })

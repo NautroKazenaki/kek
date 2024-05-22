@@ -18,6 +18,7 @@ const details_module_1 = require("./database/details/details.module");
 const products_module_1 = require("./database/products/products.module");
 const orders_module_1 = require("./database/orders/orders.module");
 const productsInDevelopment_module_1 = require("./database/productsInDevelopment/productsInDevelopment.module");
+const archieve_module_1 = require("./database/archieve/archieve.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -35,7 +36,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             database_module_1.DatabaseModule, users_module_1.UsersModule, providers_module_1.ProvidersModule,
             acceptance_module_1.AcceptanceModule, details_module_1.DetailsModule, products_module_1.ProductsModule,
-            orders_module_1.OrdersModule, productsInDevelopment_module_1.ProductsInDevelopmentModule
+            orders_module_1.OrdersModule, productsInDevelopment_module_1.ProductsInDevelopmentModule, archieve_module_1.ArchieveModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
