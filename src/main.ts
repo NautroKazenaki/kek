@@ -4,14 +4,16 @@ import * as sqlite3 from 'sqlite3';
 import { UsersService } from './database/users/users.service';
 import * as bodyParser from 'body-parser';
 import * as fs from 'fs';
+import * as path from 'path';
 
 
 async function bootstrap() {
 
   const httpsOptions = {
-    key: fs.readFileSync(__dirname + '/..certs/selfsigned.key'),
-    cert: fs.readFileSync(__dirname + '/../certs/selfsigned.crt'),
+    key: fs.readFileSync('./selfsigned.key'),
+    cert: fs.readFileSync('./selfsigned.crt'),
   };
+  // let httpsOptions = null;
 
   const app = await NestFactory.create(AppModule, { httpsOptions });
    app.enableCors({

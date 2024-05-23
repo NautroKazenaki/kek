@@ -4,12 +4,8 @@ const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const users_service_1 = require("./database/users/users.service");
 const bodyParser = require("body-parser");
-const fs = require("fs");
 async function bootstrap() {
-    const httpsOptions = {
-        key: fs.readFileSync('key.pem'),
-        cert: fs.readFileSync('cert.pem'),
-    };
+    let httpsOptions = null;
     const app = await core_1.NestFactory.create(app_module_1.AppModule, { httpsOptions });
     app.enableCors({
         origin: '*',
